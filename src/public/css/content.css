@@ -1,0 +1,18 @@
+.content{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content .content__sidebar{
+    flex: 1;
+}
+
+.content .content__mainContent{
+    flex: 5;
+}
+
+.content .content__sidebar a{
+    text-decoration: none;
+    color: #000
+}
