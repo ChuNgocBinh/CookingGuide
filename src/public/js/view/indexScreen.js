@@ -1,5 +1,5 @@
 import BaseComponent from "../components/BaseComponent.js";
-import Content from "../components/content.js";
+import Content from "../components/mainContent.js";
 import Navbar from "../components/navbar.js";
 import SideBar from "../components/sidebar.js";
 import { appendTo } from "../utils.js";
@@ -9,10 +9,16 @@ export default class IndexScreen extends BaseComponent{
     
     render() {
         let $container = document.createElement("div");
+        $container.style.height = '100vh';
+
+        $container.style.backgroundImage = "url(../../img/home-bg.jpg"
+        $container.style.backgroundAttachment = 'fixed';
+
         appendTo($container, new Navbar());
 
         let $content = document.createElement("div");
-        $content.className = 'content'
+        $content.className = 'content d-flex ';
+
 
         appendTo($content, new SideBar(), new Content())
 

@@ -1,8 +1,21 @@
+/* *{
+    font-family: 'Nunito', sans-serif;
+} */
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .navbar{
     /* height:60px; */
     box-shadow: 0 0 5px #333;
     margin: 0;
-    padding: 0
+    padding: 0;
+    position: fixed;
+    top:0; left: 0; right:0;
+    z-index: 1000;
+    background-color: #fff;
 }
 
 .navbar .navbar-brand{
