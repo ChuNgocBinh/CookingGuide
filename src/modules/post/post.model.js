@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const PostSchema = mongoose.Schema({
+    imgUrl: {
+        type: String,
+        require: true,
+    },
     title: {
         type: String,
         require: true,
@@ -17,13 +21,31 @@ const PostSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
-    likeView: {
+    buyCount: {
         type: Number,
         default: 0,
     },
+    price: {
+        type: Number,
+        required: true,
+    },
     createBy: {
         type: mongoose.Types.ObjectId,
-        require: true
+        require: true,
+        ref: 'user'
+    },
+    rate: [
+        {
+            userId: {
+                type: mongoose.Types.ObjectId,
+                ref: 'user'
+            },
+            star: Number,
+        }
+    ],
+    rule: {
+        type: String,
+        default: 'food',
     }
 })
 

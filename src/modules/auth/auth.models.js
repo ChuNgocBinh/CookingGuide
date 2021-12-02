@@ -16,8 +16,14 @@ const userSchema = mongoose.Schema({
     role: {
         type: String,
         default: 'user'
-    }
+    },
+    adress: String,
+    imgUrl: String,
+    phone: Number,
+
 })
 
 const UserModel = mongoose.model('user', userSchema)
+
+
 module.exports = UserModel

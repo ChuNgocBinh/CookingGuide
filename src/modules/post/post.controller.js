@@ -4,16 +4,47 @@ const UserModel = require('../auth/auth.models')
 const jwt = require('jsonwebtoken')
 
 const getAllPosts = async (req, res) => {
-    const posts = await PostModel.find()
+    const { keyword, rule, sortField, sortDirection, skip, limit } = req.query;
+
+    const keywordFilter = keyword ? {
+        $or: {
+            title: { $regex: new RegExp(`${keyword}, 'i'`) }
+        }
+    } : {};
+    const ruleFilter = rule ? { rule } : {};
+
+    const sortDirectionParams = sortDirection ? Number(sortDirection) : -1
+    const sortFieldParams = sortField ? {
+        [sortField]: sortDirectionParams
+    } : {};
+
+    const paginations = {
+        skip: skip ? Number(skip) : 0,
+        limit: limit ? Number(limit) : 8
+    }
+
+    const filter = {
+        ...keywordFilter,
+        ...ruleFilter,
+    }
+
+    const posts = await PostModel
+        .find(filter)
+        .sort(sortFieldParams)
+        .skip(paginations.skip)
+        .limit(paginations.limit)
     res.send({
         success: true,
         data: posts
     })
 }
 
+
 const getPost = async (req, res) => {
     const { postId } = req.params
-    const post = await PostModel.findById(postId)
+    const post = await PostModel
+        .findById(postId)
+        .populate('createBy', 'name')
     res.send({
         success: true,
         data: post
@@ -30,7 +61,8 @@ const createPost = async (req, res) => {
 
     res.send({
         success: true,
-        data: newPost
+        data: newPost,
+        message: 'Tạo bài viết thành công'
     })
 
 }

@@ -8,7 +8,7 @@ const isAuth = async (req, res, next) => {
     const token = req.headers.authorization;
 
     if (!token) {
-        throw new HttpError('khong co token', 400)
+        throw new HttpError('Bạn chưa đăng nhập', 400)
     }
 
     const verify = tokenProvider.verify(token);
@@ -17,7 +17,6 @@ const isAuth = async (req, res, next) => {
     if (!verify.userId) {
         throw new HttpError('token valid', 400)
     }
-    console.log(verify.userId);
 
     const existedUser = await UserModel.findById(verify.userId)
 

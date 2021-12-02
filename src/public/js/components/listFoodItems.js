@@ -3,7 +3,16 @@ import BaseComponent from "./BaseComponent.js";
 import FoodItem from "./foodItem.js";
 
 export default class ListFoodItems extends BaseComponent {
+    constructor(props) {
+        super(props);
+    }
 
+    handleClickDetail(e, item) {
+        e.preventDefault();
+        localStorage.setItem('postId', JSON.stringify(item._id))
+        router.navigate(`/details/${item._id}`)
+        window.location.reload()
+    }
 
     render() {
         let $container = document.createElement("div");
@@ -13,17 +22,19 @@ export default class ListFoodItems extends BaseComponent {
         $listItem.className = 'list-items'
         $listItem.style.width = '10000px'
 
-        appendTo(
-            $listItem,
-            new FoodItem(),
-            new FoodItem(),
-            new FoodItem(),
-            new FoodItem(),
-            new FoodItem(),
-            new FoodItem(),
-            new FoodItem(),
-            new FoodItem(),
-        )
+        let listFood = this.props.data.map(item => {
+            let _foodItem = new FoodItem({
+                src: item.imgUrl,
+                title: item.title,
+                description: item.description,
+                onClick: (e) => {
+                    this.handleClickDetail(e, item)
+                }
+            })
+            return _foodItem
+        })
+
+        appendTo($listItem, ...listFood)
 
         let $btn = document.createElement("div");
         $btn.className = 'listFoodItem__btn'
@@ -47,7 +58,6 @@ export default class ListFoodItems extends BaseComponent {
         $next.innerHTML = '<i class="fas fa-chevron-right"></i>'
         $next.onclick = () => {
             counter++;
-            console.log(counter);
             $listItem.style.transform = `translateX(${-290 * counter}px)`
             $listItem.style.transition = '0.3s linear'
             if (counter >= 7) {

@@ -1,6 +1,34 @@
+import { getUser } from "../models/getData.js";
 import BaseComponent from "./BaseComponent.js";
 
 export default class Navbar extends BaseComponent {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: 'Đăng nhập',
+            image: '../../img/user.png',
+        }
+    }
+
+    handleClickProfile(e) {
+        e.preventDefault();
+        router.navigate('/profile');
+    }
+
+    handleClickSignOut(e) {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        router.navigate('/login');
+    }
+
+    async componentDidMount() {
+        let user = await getUser()
+        let tmpState = this.state;
+        tmpState.name = user.data.name ? user.data.name : `Đăng nhập`
+        tmpState.image = user.data.imgUrl ? user.data.imgUrl : '../../img/user.png'
+        this.setState(tmpState);
+    }
 
 
     render() {
@@ -28,15 +56,64 @@ export default class Navbar extends BaseComponent {
 
         let $user = document.createElement("div");
         $user.className = 'navbar-user d-flex align-items-center justify-content-center';
+
         let $nameUser = document.createElement("div");
-        $nameUser.innerHTML = 'Chu Ngoc Binh'
+        $nameUser.innerHTML = this.state.name;
+
         let $imgUser = document.createElement("div")
-        $imgUser.className = 'navbar-user-img ms-1'
+        $imgUser.className = 'navbar-user-img ms-2'
+
         let $imgFace = document.createElement("img")
-        $imgFace.src = "../../img/user.jpg";
+        $imgFace.src = this.state.image;
         $imgUser.append($imgFace)
 
-        $user.append($nameUser, $imgUser);
+        let $dropdown = document.createElement("div");
+        $dropdown.className = 'dropdown mx-2';
+
+
+        let $btnDropdown = document.createElement("btn")
+        $btnDropdown.innerHTML = '<i class="fas fa-chevron-down"></i>'
+        $btnDropdown.setAttribute('data-bs-toggle', 'dropdown')
+
+        let $listDropdown = document.createElement("ul");
+        $listDropdown.className = 'dropdown-menu';
+
+        let $listProfile = document.createElement('li')
+        let $linkProfile = document.createElement('a');
+        $linkProfile.href = '#';
+        $linkProfile.innerHTML = 'Hồ sơ';
+        $linkProfile.className = 'dropdown-item';
+        $listProfile.append($linkProfile);
+        $linkProfile.onclick = (e) => {
+            this.handleClickProfile(e);
+        }
+
+        let $listSignOut = document.createElement('li')
+        let $linkSignOut = document.createElement('a');
+        $linkSignOut.href = '#';
+        $linkSignOut.innerHTML = 'Đăng xuất';
+        $linkSignOut.className = 'dropdown-item';
+        $listSignOut.append($linkSignOut);
+        $linkSignOut.onclick = (e) => {
+            this.handleClickSignOut(e);
+        }
+
+        let $listLogin = document.createElement('li')
+        let $linkLogin = document.createElement('a');
+        $linkLogin.href = '#';
+        $linkLogin.innerHTML = 'Đăng nhập';
+        $linkLogin.className = 'dropdown-item';
+        $listLogin.append($linkLogin);
+        $linkLogin.onclick = (e) => {
+            e.preventDefault();
+            router.navigate('/login')
+        }
+
+        $listDropdown.append($listProfile, $linkSignOut, $listLogin);
+        $dropdown.append($btnDropdown, $listDropdown)
+
+
+        $user.append($nameUser, $imgUser, $dropdown);
 
         $container.append($brand, $search, $user);
 

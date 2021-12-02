@@ -1,12 +1,56 @@
-import BaseComponent from "../components/BaseComponent.js";
-import ListFoodItems from "../components/listFoodItems.js";
+import BaseComponent from "./BaseComponent.js";
+import ListFoodItems from "./listFoodItems.js";
+import { getFood } from "../models/getData.js";
 import { appendTo } from "../utils.js";
 
-export default class HomeScreen extends BaseComponent {
+export default class Home extends BaseComponent {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            food: [],
+            drink: [],
+            scream: [],
+        }
+    }
+
+    async componentDidMount() {
+        let tmpState = this.state;
+        let listFood = await getFood('http://localhost:9000/api/posts', {
+            rule: 'food',
+            sortField: 'buyCount',
+            skip: 0,
+            limit: 8
+        })
+
+        tmpState.food = listFood;
+        let listDrink = await getFood('http://localhost:9000/api/posts', {
+            rule: 'drink',
+            sortField: 'buyCount',
+            skip: 0,
+            limit: 8
+        })
+        tmpState.drink = listDrink;
+
+        let listScream = await getFood('http://localhost:9000/api/posts', {
+            rule: 'scream',
+            sortField: 'buyCount',
+            skip: 0,
+            limit: 8
+        })
+        tmpState.scream = listScream;
+
+        this.setState(tmpState);
+
+    }
 
     render() {
         let $container = document.createElement("div");
+        $container.className = 'content__mainContent ms-3 ';
+        $container.style.height = '100vh';
+        $container.style.paddingTop = '100px';
+        $container.style.overflowY = 'auto';
+        $container.style.overflowX = 'hidden';
 
         let $home = document.createElement("div");
 
@@ -36,19 +80,24 @@ export default class HomeScreen extends BaseComponent {
 
         let $foodTitle = document.createElement("h3");
         $foodTitle.innerHTML = 'Đồ ăn';
-        // $foodTitle.className = 'text-center';
         $container.append($foodTitle);
-        appendTo($container, new ListFoodItems())
+        appendTo($container, new ListFoodItems({
+            data: this.state.food
+        }))
 
         let $drinkTitle = document.createElement("h3");
         $drinkTitle.innerHTML = 'Đồ uống';
         $container.append($drinkTitle);
-        appendTo($container, new ListFoodItems())
+        appendTo($container, new ListFoodItems({
+            data: this.state.drink
+        }))
 
         let $screamTitle = document.createElement("h3");
         $screamTitle.innerHTML = 'Kem';
         $container.append($screamTitle);
-        appendTo($container, new ListFoodItems())
+        appendTo($container, new ListFoodItems({
+            data: this.state.scream
+        }))
 
         return $container;
     }

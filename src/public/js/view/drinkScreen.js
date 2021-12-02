@@ -6,8 +6,9 @@ import { appendTo } from "../utils.js";
 
 import Home from "../components/home.js";
 import Food from "../components/food.js";
+import Drink from "../components/drink.js";
 
-export default class FoodScreen extends BaseComponent {
+export default class DrinkScreen extends BaseComponent {
 
     render() {
         let $container = document.createElement("div");
@@ -22,7 +23,7 @@ export default class FoodScreen extends BaseComponent {
         $content.className = 'content d-flex';
 
 
-        appendTo($content, new SideBar(), new Food())
+        appendTo($content, new SideBar(), new Drink())
 
         $container.append($content)
 

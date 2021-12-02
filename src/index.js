@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const path = require('path');
 const postRouter = require('./modules/post/post.router')
 const authRouter = require('./modules/auth/auth.router')
+const UploadRouter = require('./modules/upload/upload.router')
+const CartRouter = require('./modules/cart/cart.router')
+const FavoriteRouter = require('./modules/favorite/favorite.router')
 const errorHandler = require('./common/errorHandle')
 const app = express();
 
@@ -20,6 +23,9 @@ async function main() {
     app.use(express.static('public'))
     app.use('/api/posts', postRouter)
     app.use('/api/auth', authRouter)
+    app.use('/api/upload', UploadRouter)
+    app.use('/api/cart', CartRouter)
+    app.use('/api/favorite', FavoriteRouter)
     app.use(errorHandler)
 
     app.listen(process.env.PORT, (err) => {

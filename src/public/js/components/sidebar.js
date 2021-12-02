@@ -1,3 +1,4 @@
+import { getCart } from "../models/getData.js";
 import { appendTo } from "../utils.js";
 import BaseComponent from "./BaseComponent.js";
 import LinkMenu from "./linkMenu.js";
@@ -6,39 +7,98 @@ export default class SideBar extends BaseComponent {
 
     constructor(props) {
         super(props);
-        this.state = [
-            { icon: '<i class="fas fa-home"></i>', href: '', value: 'Trang chủ' },
-            { icon: '<i class="fas fa-utensils"></i>', href: '', value: 'Đồ ăn' },
-            { icon: '<i class="fas fa-glass-cheers"></i>', href: '', value: 'Đồ uống' },
-            { icon: '<i class="fas fa-ice-cream"></i>', href: '', value: 'Kem' },
-            { icon: '<i class="fas fa-thumbs-up"></i>', href: '', value: 'Yêu thích' },
-            { icon: '<i class="far fa-plus-square"></i>', href: '', value: 'Tạo món ăn mới' },
-            { icon: '<i class="fas fa-shipping-fast"></i>', href: '', value: 'Đặt đồ ăn' },
-            { icon: '<i class="fas fa-cart-plus"></i>', href: '', value: 'Giỏ hàng' },
-            { icon: '<i class="fas fa-blog"></i>', href: '', value: 'Blog' },
-            { icon: '<i class="fas fa-phone-volume"></i>', href: '', value: 'Liên hệ' },
-        ]
     }
 
     render() {
         let $sidebar = document.createElement("div");
-        $sidebar.className = 'content__sidebar mt-3'
+        $sidebar.className = 'content__sidebar'
         $sidebar.style.paddingTop = '80px'
 
         let $menu = document.createElement("div");
 
         appendTo(
             $menu,
-            new LinkMenu({ icon: '<i class="fas fa-home"></i>', href: '', value: 'Trang chủ' }),
-            new LinkMenu({ icon: '<i class="fas fa-utensils"></i>', href: '', value: 'Đồ ăn' }),
-            new LinkMenu({ icon: '<i class="fas fa-glass-cheers"></i>', href: '', value: 'Đồ uống' }),
-            new LinkMenu({ icon: '<i class="fas fa-ice-cream"></i>', href: '', value: 'Kem' }),
-            new LinkMenu({ icon: '<i class="fas fa-thumbs-up"></i>', href: '', value: 'Yêu thích' }),
-            new LinkMenu({ icon: '<i class="far fa-plus-square"></i>', href: '', value: 'Tạo món ăn mới' }),
-            new LinkMenu({ icon: '<i class="fas fa-shipping-fast"></i>', href: '', value: 'Đặt đồ ăn' }),
-            new LinkMenu({ icon: '<i class="fas fa-cart-plus"></i>', href: '', value: 'Giỏ hàng' }),
-            new LinkMenu({ icon: '<i class="fas fa-blog"></i>', href: '', value: 'Blog' }),
-            new LinkMenu({ icon: '<i class="fas fa-phone-volume"></i>', href: '', value: 'Liên hệ' }),
+            new LinkMenu({
+                icon: '<i class="fas fa-home"></i>',
+                href: '',
+                value: 'Trang chủ',
+                number: '',
+                Onclick: (e) => {
+                    e.preventDefault();
+                    router.navigate('/home')
+                }
+            }),
+            new LinkMenu({
+                icon: '<i class="fas fa-utensils"></i>',
+                href: '',
+                value: 'Đồ ăn',
+                number: '',
+                Onclick: (e) => {
+                    e.preventDefault();
+                    router.navigate('/food')
+                }
+            }),
+            new LinkMenu({
+                icon: '<i class="fas fa-glass-cheers"></i>',
+                href: '',
+                value: 'Đồ uống',
+                number: '',
+                Onclick: (e) => {
+                    e.preventDefault();
+                    router.navigate('/drink')
+                }
+            }),
+            new LinkMenu({
+                icon: '<i class="fas fa-ice-cream"></i>',
+                href: '',
+                value: 'Kem',
+                number: '',
+                Onclick: (e) => {
+                    e.preventDefault();
+                    router.navigate('/scream')
+                }
+            }),
+            new LinkMenu({
+                icon: '<i class="fas fa-thumbs-up"></i>',
+                href: '',
+                value: 'Yêu thích',
+                number: '',
+            }),
+
+            new LinkMenu({
+                icon: '<i class="far fa-plus-square"></i>',
+                href: '',
+                value: 'Tạo món ăn mới',
+                number: '',
+                Onclick: (e) => {
+                    e.preventDefault();
+                    router.navigate('/create-food')
+                }
+            }),
+            new LinkMenu({
+                icon: '<i class="fas fa-cart-plus"></i>',
+                href: '',
+                value: 'Giỏ hàng',
+                number: this.state,
+                Onclick: (e) => {
+                    e.preventDefault();
+                    router.navigate('/cart')
+                }
+            }),
+            new LinkMenu({
+                icon: '<i class="fas fa-blog"></i>',
+                href: '',
+                value: 'Blog',
+                number: '',
+            }),
+
+            new LinkMenu({
+                icon: '<i class="fas fa-phone-volume"></i>',
+                href: '',
+                value: 'Liên hệ',
+                number: '',
+            }),
+
         );
 
         $sidebar.append($menu)
