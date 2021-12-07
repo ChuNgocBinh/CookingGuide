@@ -1,7 +1,6 @@
-import { getCart } from "../models/getData.js";
-import { appendTo } from "../utils.js";
-import BaseComponent from "./BaseComponent.js";
-import LinkMenu from "./linkMenu.js";
+import { appendTo } from "../../utils.js";
+import BaseComponent from "../BaseComponent.js";
+import LinkMenu from "../Common/linkMenu.js";
 
 export default class SideBar extends BaseComponent {
 
@@ -63,6 +62,10 @@ export default class SideBar extends BaseComponent {
                 href: '',
                 value: 'Yêu thích',
                 number: '',
+                Onclick: (e) => {
+                    e.preventDefault();
+                    router.navigate('/favorite')
+                }
             }),
 
             new LinkMenu({

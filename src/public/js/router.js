@@ -3,12 +3,14 @@ import CartScreen from "./view/cartScreen.js";
 import CreateFoodScreen from "./view/creaateFoodScreen.js";
 import DetailScreen from "./view/detailScreen.js";
 import DrinkScreen from "./view/drinkScreen.js";
+import FavoriteScreen from "./view/favoriteScreen.js";
 import FoodScreen from "./view/foodScreen.js";
 import IndexScreen from "./view/indexScreen.js";
 import LoginScreen from "./view/loginScreen.js";
 import ProfileScreen from "./view/profileScreen.js";
 import RegisterScreen from "./view/registerScreen.js";
 import ScreamScreen from "./view/screamScreen.js";
+import SearchScreen from "./view/searcSreen.js";
 
 let root = null;
 let useHash = true; // Defaults to: false
@@ -20,6 +22,8 @@ appendTo($root, new IndexScreen());
 
 let postIdJSON = localStorage.getItem('postId');
 let postId = JSON.parse(postIdJSON);
+let searchJSON = localStorage.getItem('search');
+let search = JSON.parse(searchJSON);
 
 router
     .on('/home', function () {
@@ -79,6 +83,18 @@ router
     .on(`/cart`, function () {
         $root.innerHTML = '';
         appendTo($root, new CartScreen())
+    }).resolve();
+
+router
+    .on(`/favorite`, function () {
+        $root.innerHTML = '';
+        appendTo($root, new FavoriteScreen())
+    }).resolve();
+
+router
+    .on(`/search/${search}`, function () {
+        $root.innerHTML = '';
+        appendTo($root, new SearchScreen())
     }).resolve();
 
 

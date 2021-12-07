@@ -35,6 +35,11 @@ export default class BaseComponent {
 
     }
 
+    componentDidUpdate() {
+
+    }
+
+
     // thay đổi lại nội dung của component cho phù hợp với trạng thái hiện tại
     refresh() {
         let $element = this.render();
@@ -42,6 +47,9 @@ export default class BaseComponent {
         if (this._isFirstRender) {
             this.componentDidMount();
             this._isFirstRender = false;
+        } else {
+            this.componentDidUpdate()
+
         }
 
         if (this.$element) {

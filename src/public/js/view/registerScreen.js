@@ -1,5 +1,5 @@
 import BaseComponent from "../components/BaseComponent.js";
-import InputWrapper from "../components/inputWrapper.js";
+import InputWrapper from "../components/Common/inputWrapper.js";
 import { registerUser } from "../models/setData.js";
 import { appendTo, validateEmail } from "../utils.js";
 

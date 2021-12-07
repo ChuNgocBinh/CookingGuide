@@ -152,5 +152,25 @@ export const createFavorite = async (data) => {
         })
 }
 
+// xoa giỏ hàng
+
+export const deleteFavorite = async (data) => {
+    let tokenJSON = localStorage.getItem('token');
+    let token = JSON.parse(tokenJSON);
+    let options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(data)
+    }
+    await fetch('http://localhost:9000/api/favorite/delete', options)
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+        })
+}
+
 
 

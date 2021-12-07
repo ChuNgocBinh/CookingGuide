@@ -1,7 +1,7 @@
-import BaseComponent from "./BaseComponent.js";
-import InputWrapper from "./inputWrapper.js";
-import { createPost, upfilesInput } from "../models/setData.js";
-import { appendTo } from "../utils.js";
+import BaseComponent from "../BaseComponent.js";
+import InputWrapper from "../Common/inputWrapper.js";
+import { createPost, upfilesInput } from "../../models/setData.js";
+import { appendTo } from "../../utils.js";
 
 export default class CreateFood extends BaseComponent {
     constructor(props) {

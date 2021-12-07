@@ -1,6 +1,6 @@
-import BaseComponent from "./BaseComponent.js";
-import { getFoodId } from "../models/getData.js";
-import { createCart } from "../models/setData.js";
+import BaseComponent from "../BaseComponent.js";
+import { getFoodId } from "../../models/getData.js";
+import { createCart, createFavorite } from "../../models/setData.js";
 
 export default class Detail extends BaseComponent {
 
@@ -24,11 +24,16 @@ export default class Detail extends BaseComponent {
         this.setState(tmpState)
     }
 
-     handeClickAddCart() {
+    handeClickAddCart() {
         let postIdJSON = localStorage.getItem('postId');
         let postId = JSON.parse(postIdJSON);
+        createCart({ postId })
+    }
 
-         createCart({postId})
+    handeClickAddFavorite() {
+        let postIdJSON = localStorage.getItem('postId');
+        let postId = JSON.parse(postIdJSON);
+        createFavorite({ postId })
     }
 
     render() {

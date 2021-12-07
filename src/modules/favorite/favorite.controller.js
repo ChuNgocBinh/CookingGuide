@@ -3,9 +3,9 @@ const FavoriteModel = require('./favorite.models')
 const httpError = require('../../common/httpError')
 const UserModel = require('../auth/auth.models')
 
-const createCart = async (req, res) => {
+const createFavorite = async (req, res) => {
     const data = req.body
-    
+
     const filter = {
         postId: data.postId,
         userId: req.user._id,
@@ -28,31 +28,22 @@ const createCart = async (req, res) => {
 
 }
 
-const getCart = async (req, res) => {
-    const token = req.headers.authorization;
+const getFavorite = async (req, res) => {
 
-    const tokenVerify = tokenProvider.verify(token)
-
-    const existedUser = await UserModel.findById(tokenVerify.userId)
-
-    if (!existedUser) {
-        throw new httpError('Tài khoản không tồn tại', 400)
-    }
-
-    const cart = await CartModel
-        .find({ userId: existedUser._id })
+    const favorite = await FavoriteModel
+        .find({ userId: req.user._id })
         .populate('postId')
-
+        .populate('userId', 'name')
     res.send({
         success: true,
-        data: cart,
+        data: favorite,
     })
 }
 
-const deleteCart = async (req, res) => {
+const deleteFavorite = async (req, res) => {
     const data = req.body;
 
-    const cart = await CartModel.findOneAndDelete(
+    const cart = await FavoriteModel.findOneAndDelete(
         data,
         { new: true }
     )
@@ -64,20 +55,8 @@ const deleteCart = async (req, res) => {
     })
 }
 
-const deleteAllCart = async (req, res) => {
-    const deleteCart = await CartModel.deleteMany()
-
-    res.send({
-        success: true,
-        data: deleteCart,
-        message: 'Xóa thành công'
-    })
-}
-
-
 module.exports = {
-    createCart,
-    getCart,
-    deleteCart,
-    deleteAllCart
+    createFavorite,
+    getFavorite,
+    deleteFavorite,
 }

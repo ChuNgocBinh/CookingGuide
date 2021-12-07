@@ -1,8 +1,8 @@
-import { getUser } from "../models/getData.js";
-import { updateUser, upfilesInput } from "../models/setData.js";
-import { appendTo } from "../utils.js";
-import BaseComponent from "./BaseComponent.js";
-import InputWrapper from "./inputWrapper.js";
+import { getUser } from "../../models/getData.js";
+import { updateUser, upfilesInput } from "../../models/setData.js";
+import { appendTo } from "../../utils.js";
+import BaseComponent from "../BaseComponent.js";
+import InputWrapper from "../Common/inputWrapper.js";
 
 export default class Profile extends BaseComponent {
     constructor(props) {

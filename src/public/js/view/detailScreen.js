@@ -1,13 +1,8 @@
 import BaseComponent from "../components/BaseComponent.js";
-import Navbar from "../components/navbar.js";
-import SideBar from "../components/sidebar.js";
-import { getFood } from "../models/getData.js";
+import Navbar from "../components/Nav/navbar.js";
+import SideBar from "../components/Nav/sidebar.js";
 import { appendTo } from "../utils.js";
-
-import Home from "../components/home.js";
-import Food from "../components/food.js";
-import CreateFood from "../components/createFood.js";
-import Detail from "../components/detail.js";
+import Detail from "../components/different/detail.js";
 
 export default class DetailScreen extends BaseComponent {
 

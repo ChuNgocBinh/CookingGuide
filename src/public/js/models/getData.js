@@ -80,3 +80,27 @@ export const deleteAllCart = async () => {
     }
     await fetch('http://localhost:9000/api/cart/delete/allcart', options)
 }
+
+
+//get yeu thich
+
+export const getFavorite = async () => {
+    let tokenJSON = localStorage.getItem('token');
+    let token = JSON.parse(tokenJSON);
+    let favorite
+
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+    }
+    await fetch('http://localhost:9000/api/favorite/', options)
+        .then(response => response.json())
+        .then(data => {
+            favorite = data.data;
+        })
+
+    return favorite;
+}

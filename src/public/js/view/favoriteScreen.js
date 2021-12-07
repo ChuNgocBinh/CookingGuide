@@ -2,9 +2,9 @@ import BaseComponent from "../components/BaseComponent.js";
 import Navbar from "../components/Nav/navbar.js";
 import SideBar from "../components/Nav/sidebar.js";
 import { appendTo } from "../utils.js";
-import Cart from "../components/Cart/cart.js";
+import Favorite from "../components/Favorite/favorite.js";
 
-export default class CartScreen extends BaseComponent {
+export default class FavoriteScreen extends BaseComponent {
 
     render() {
         let $container = document.createElement("div");
@@ -19,7 +19,7 @@ export default class CartScreen extends BaseComponent {
         $content.className = 'content d-flex';
 
 
-        appendTo($content, new SideBar(), new Cart())
+        appendTo($content, new SideBar(), new Favorite())
 
         $container.append($content)
 

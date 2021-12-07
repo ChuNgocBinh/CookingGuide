@@ -1,5 +1,5 @@
-import { getUser } from "../models/getData.js";
-import BaseComponent from "./BaseComponent.js";
+import { getUser } from "../../models/getData.js";
+import BaseComponent from "../BaseComponent.js";
 
 export default class Navbar extends BaseComponent {
 
@@ -8,6 +8,7 @@ export default class Navbar extends BaseComponent {
         this.state = {
             name: 'Đăng nhập',
             image: '../../img/user.png',
+            search: ''
         }
     }
 
@@ -20,6 +21,21 @@ export default class Navbar extends BaseComponent {
         e.preventDefault();
         localStorage.removeItem('token');
         router.navigate('/login');
+    }
+
+    handleSubmitSearch(e) {
+        e.preventDefault();
+        if (this.state.search!=''){
+            localStorage.setItem('search',JSON.stringify(this.state.search))
+            router.navigate(`/search/${this.state.search}`);
+            window.location.reload();
+        }
+    }
+
+    handleChangeSearch(value) {
+        let tmpState = this.state;
+        tmpState.search = value;
+        this.setState(tmpState)
     }
 
     async componentDidMount() {
@@ -44,9 +60,17 @@ export default class Navbar extends BaseComponent {
 
         let $search = document.createElement("form");
         $search.className = 'navbar-search d-flex align-items-center justify-content-center'
+        $search.onsubmit = (e) => {
+            this.handleSubmitSearch(e);
+        }
+
         let $inputSearch = document.createElement("input");
         $inputSearch.className = 'flex-grow-1 ms-1 ps-2'
         $inputSearch.placeholder = 'Tìm kiếm...'
+        $inputSearch.value = this.state.search
+        $inputSearch.onchange = (e) => {
+            this.handleChangeSearch(e.target.value)
+        };
 
         let $btnSearch = document.createElement("button");
         $btnSearch.innerHTML = '<i class="fas fa-search"></i>';
@@ -69,6 +93,7 @@ export default class Navbar extends BaseComponent {
 
         let $dropdown = document.createElement("div");
         $dropdown.className = 'dropdown mx-2';
+        $dropdown.style.cursor = 'pointer';
 
 
         let $btnDropdown = document.createElement("btn")

@@ -1,11 +1,8 @@
 import BaseComponent from "../components/BaseComponent.js";
-import Navbar from "../components/navbar.js";
-import SideBar from "../components/sidebar.js";
-import { getFood } from "../models/getData.js";
+import Navbar from "../components/Nav/navbar.js";
+import SideBar from "../components/Nav/sidebar.js";
 import { appendTo } from "../utils.js";
-
-import Home from "../components/home.js";
-import Food from "../components/food.js";
+import Food from "../components/Food/food.js";
 
 export default class FoodScreen extends BaseComponent {
 

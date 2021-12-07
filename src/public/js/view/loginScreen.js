@@ -1,8 +1,7 @@
 import BaseComponent from "../components/BaseComponent.js";
-import InputWrapper from "../components/inputWrapper.js";
-import { getUser } from "../models/getData.js";
-import { loginUser, registerUser } from "../models/setData.js";
-import { appendTo, validateEmail } from "../utils.js";
+import InputWrapper from "../components/Common/inputWrapper.js";
+import { loginUser } from "../models/setData.js";
+import { appendTo } from "../utils.js";
 
 export default class LoginScreen extends BaseComponent {
     constructor(props) {

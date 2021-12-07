@@ -2,14 +2,13 @@ require('express-async-errors')
 const PostModel = require('./post.model')
 const UserModel = require('../auth/auth.models')
 const jwt = require('jsonwebtoken')
+const slugify = require('slugify');
 
 const getAllPosts = async (req, res) => {
     const { keyword, rule, sortField, sortDirection, skip, limit } = req.query;
 
     const keywordFilter = keyword ? {
-        $or: {
-            title: { $regex: new RegExp(`${keyword}, 'i'`) }
-        }
+        slug: { $regex: new RegExp(slugify(keyword), 'i') }
     } : {};
     const ruleFilter = rule ? { rule } : {};
 
@@ -56,6 +55,7 @@ const createPost = async (req, res) => {
 
     const newPost = await PostModel.create({
         ...data,
+        slug: slugify(data.title),
         createBy: req.user._id
     });
 

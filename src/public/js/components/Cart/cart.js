@@ -1,7 +1,7 @@
-import { deleteAllCart, getCart, getFoodId } from "../models/getData.js";
-import { deleteCart } from "../models/setData.js";
-import { appendTo } from "../utils.js";
-import BaseComponent from "./BaseComponent.js";
+import { deleteAllCart, getCart, getFoodId } from "../../models/getData.js";
+import { deleteCart } from "../../models/setData.js";
+import { appendTo } from "../../utils.js";
+import BaseComponent from "../BaseComponent.js";
 import CartItem from "./cartItem.js";
 
 export default class Cart extends BaseComponent {

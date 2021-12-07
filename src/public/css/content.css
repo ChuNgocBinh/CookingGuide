@@ -32,6 +32,11 @@
     border-left: 3px solid var(--linkHover);
 }
 
+.content .content__sidebar .active{
+    color: var(--linkHover);
+    border-left: 3px solid var(--linkHover);
+}
+
 /* -------general box --------- */
 
 .box{
@@ -161,8 +166,23 @@
     animation: homeImg 1.5s linear infinite;
 }
 
+/* -----favoriteItem----- */
 
+.favoriteItem_des{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+}
 
+.favoriteItem_name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical; 
+}
 
 
 

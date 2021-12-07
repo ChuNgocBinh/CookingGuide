@@ -1,7 +1,7 @@
-import BaseComponent from "./BaseComponent.js";
-import ListFoodItems from "./listFoodItems.js";
-import { getFood } from "../models/getData.js";
-import { appendTo } from "../utils.js";
+import BaseComponent from "../BaseComponent.js";
+import ListFoodItems from "../Common/listFoodItems.js";
+import { getFood } from "../../models/getData.js";
+import { appendTo } from "../../utils.js";
 
 export default class Home extends BaseComponent {
 

@@ -1,5 +1,5 @@
-import { appendTo } from "../utils.js";
-import BaseComponent from "./BaseComponent.js";
+import { appendTo } from "../../utils.js";
+import BaseComponent from "../BaseComponent.js";
 import FoodItem from "./foodItem.js";
 
 export default class ListFoodItems extends BaseComponent {

@@ -1,6 +1,6 @@
-import { appendTo } from "../utils.js";
-import BaseComponent from "./BaseComponent.js";
-import InputWrapper from "./inputWrapper.js";
+import { appendTo } from "../../utils.js";
+import BaseComponent from "../BaseComponent.js";
+import InputWrapper from "../Common/inputWrapper.js";
 
 export default class CartItem extends BaseComponent {
     constructor(props) {
