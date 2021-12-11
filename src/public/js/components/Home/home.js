@@ -1,6 +1,6 @@
 import BaseComponent from "../BaseComponent.js";
 import ListFoodItems from "../Common/listFoodItems.js";
-import { getFood } from "../../models/getData.js";
+import { getQuery } from "../../models/getData.js";
 import { appendTo } from "../../utils.js";
 
 export default class Home extends BaseComponent {
@@ -16,7 +16,7 @@ export default class Home extends BaseComponent {
 
     async componentDidMount() {
         let tmpState = this.state;
-        let listFood = await getFood('http://localhost:9000/api/posts', {
+        let listFood = await getQuery('http://localhost:9000/api/posts', {
             rule: 'food',
             sortField: 'buyCount',
             skip: 0,
@@ -24,7 +24,7 @@ export default class Home extends BaseComponent {
         })
 
         tmpState.food = listFood;
-        let listDrink = await getFood('http://localhost:9000/api/posts', {
+        let listDrink = await getQuery('http://localhost:9000/api/posts', {
             rule: 'drink',
             sortField: 'buyCount',
             skip: 0,
@@ -32,7 +32,7 @@ export default class Home extends BaseComponent {
         })
         tmpState.drink = listDrink;
 
-        let listScream = await getFood('http://localhost:9000/api/posts', {
+        let listScream = await getQuery('http://localhost:9000/api/posts', {
             rule: 'scream',
             sortField: 'buyCount',
             skip: 0,

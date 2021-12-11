@@ -25,7 +25,7 @@ export const getUser = async () => {
 
 // get food
 
-export const getFood = async (url, params) => {
+export const getQuery = async (url, params) => {
     let re = Object.keys(params).map(key => `${key}=${params[key]}`)
     let urlRequest = `${url}?${re.join('&')}`
     let listFood

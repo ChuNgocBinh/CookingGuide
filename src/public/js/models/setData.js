@@ -172,5 +172,17 @@ export const deleteFavorite = async (data) => {
         })
 }
 
-
+export const createComment = async (data) => {
+    let tokenJSON = localStorage.getItem('token');
+    let token = JSON.parse(tokenJSON);
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(data)
+    }
+    await fetch('http://localhost:9000/api/comments', options)
+}
 

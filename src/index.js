@@ -8,6 +8,7 @@ const authRouter = require('./modules/auth/auth.router')
 const UploadRouter = require('./modules/upload/upload.router')
 const CartRouter = require('./modules/cart/cart.router')
 const FavoriteRouter = require('./modules/favorite/favorite.router')
+const CommentRouter = require('./modules/comment/comment.router')
 const errorHandler = require('./common/errorHandle')
 const app = express();
 
@@ -26,6 +27,7 @@ async function main() {
     app.use('/api/upload', UploadRouter)
     app.use('/api/cart', CartRouter)
     app.use('/api/favorite', FavoriteRouter)
+    app.use('/api/comments', CommentRouter)
     app.use(errorHandler)
 
     app.listen(process.env.PORT, (err) => {

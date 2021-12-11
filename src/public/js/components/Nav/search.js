@@ -1,4 +1,4 @@
-import { getFood } from "../../models/getData.js";
+import { getQuery } from "../../models/getData.js";
 import { appendTo } from "../../utils.js";
 import BaseComponent from "../BaseComponent.js";
 import FoodItem from "../Common/foodItem.js";
@@ -13,7 +13,7 @@ export default class Search extends BaseComponent {
         let searchJSON = localStorage.getItem('search');
         let search = JSON.parse(searchJSON);
 
-        let data = await getFood('http://localhost:9000/api/posts/', {
+        let data = await getQuery('http://localhost:9000/api/posts/', {
             keyword: search
         })
         let tmpState = this.state;

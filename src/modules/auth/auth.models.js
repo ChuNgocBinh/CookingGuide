@@ -21,6 +21,8 @@ const userSchema = mongoose.Schema({
     imgUrl: String,
     phone: Number,
 
+},{
+    timestamps: true,
 })
 
 const UserModel = mongoose.model('user', userSchema)

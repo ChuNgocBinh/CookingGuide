@@ -1,6 +1,6 @@
 import BaseComponent from "../BaseComponent.js";
 import FoodItem from "../Common/foodItem.js";
-import { getFood } from "../../models/getData.js";
+import { getQuery } from "../../models/getData.js";
 import { appendTo } from "../../utils.js";
 
 export default class Scream extends BaseComponent {
@@ -18,7 +18,7 @@ export default class Scream extends BaseComponent {
     
     async componentDidMount() {
         let tmpState = this.state;
-        let listFood = await getFood('http://localhost:9000/api/posts', {
+        let listFood = await getQuery('http://localhost:9000/api/posts', {
             rule: 'scream',
             sortField: 'buyCount',
         })

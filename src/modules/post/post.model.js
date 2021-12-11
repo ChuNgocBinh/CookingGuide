@@ -51,6 +51,8 @@ const PostSchema = mongoose.Schema({
         type: String,
         default: 'food',
     }
+},{
+    timestamps: true,
 })
 
 const PostModel = mongoose.model('Post', PostSchema);

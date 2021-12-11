@@ -1,6 +1,9 @@
 import BaseComponent from "../BaseComponent.js";
 import { getFoodId } from "../../models/getData.js";
 import { createCart, createFavorite } from "../../models/setData.js";
+import {appendTo} from "../../utils.js";
+import ListComment from "../comments/listComments.js";
+
 
 export default class Detail extends BaseComponent {
 
@@ -38,11 +41,14 @@ export default class Detail extends BaseComponent {
 
     render() {
         let $container = document.createElement('div');
-        $container.className = 'content__mainContent ms-3 d-flex';
+        $container.className = 'content__mainContent ms-3 ';
         $container.style.height = '100vh';
         $container.style.paddingTop = '100px';
         $container.style.overflowY = 'auto';
         $container.style.overflowX = 'hidden';
+
+        let $main = document.createElement('div')
+        $main.className = 'd-flex'
 
         let $image = document.createElement('div')
         let $imgFood = document.createElement('img');
@@ -99,7 +105,12 @@ export default class Detail extends BaseComponent {
 
         $detail.append($nameFood, $price, $interact, $description, $btnCart, $btnFavorite, $desTitle, $content, $createBy)
 
-        $container.append($image, $detail);
+        $main.append($image, $detail);
+        $container.append($main)
+
+        appendTo($container, new ListComment({}))
+
+        
 
         return $container
     }
